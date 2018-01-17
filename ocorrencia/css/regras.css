@@ -1,0 +1,696 @@
+/* Parametrização do cabeçalho  */
+.cabecalho_cadastro{
+	text-align: center;
+	width: 100%;
+	height: 150px;
+	padding: 0;
+	margin: 0;
+	/*background: #3498db;*/
+	font-weight: bolder;
+	background: #eaedf2;
+	color: #34495e;
+}
+
+#header {
+	width: 100%;
+	height: 150px;
+	padding: 0;
+	margin: 0;
+	/*background:  #3498db;*/
+	background:  #3498db;
+}
+
+#header img {
+	position: absolute;
+	left: 10%;
+	top: 2.2%;
+}
+
+#header p {
+	position: relative;
+	padding: 0;
+	margin: 0;
+	width: 35%;
+	top: 76.8%;
+	left: 10%;
+	color: rgba(2,47,93,1);
+	font-weight: bolder;
+}
+
+#header h1 {
+	padding: 0;
+	margin: 0;
+}
+
+
+#header2 {
+	width: 100%;
+	height: 150px;
+	padding: 0;
+	margin: 0;
+	/*background:  #3498db;*/
+	background:  #3498db;
+}
+
+#header2 img {
+	position: absolute;
+	left: 41.4%;
+	top: 2.2%;
+}
+
+#header2 p {
+	position: absolute;
+	left: 41.4%;
+	top: 16.8%;
+	color:  #34495e;
+	font-weight: bolder;
+}
+
+#header2 h1 {
+	padding: 0;
+	margin: 0;
+}
+
+.subcabecalho {
+	position: absolute;
+	right: 5.2%;
+	top: 5.8%;
+	width: 50%;
+	color: rgba(2,47,93,1);
+	font-weight: bolder;
+}
+
+.subcabecalho h1 {
+	   text-shadow: 2px 2px #2c3e50;
+}
+
+/* Parametrização do menu */
+
+body, 
+.menu,
+.sub-menu {
+    margin: 0;
+    padding: 0;
+}
+.clearfix:after{
+    content: '.';
+    display: block;
+    clear: both;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+.menu,
+.sub-menu {
+    list-style: none;
+    background: #2980b9;
+}
+.sub-menu {
+    background: rgba(44, 62, 80, 0.8);
+    z-index: 1;
+}
+.menu a {
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+.menu li {
+    position: relative;
+    text-decoration: none;
+}
+.menu > li {
+    float: left;
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.menu > li a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+
+.menu > li:hover {
+    background: #2c3e45;
+    color: whitesmoke;
+    text-decoration: none;
+    transition-duration: 1s;
+}
+.menu li:hover > .sub-menu {
+    display: block;
+}
+.sub-menu {
+    display: none;
+    position: absolute;
+    min-width: 150px;
+    text-decoration: none;
+}
+.sub-menu li:hover {
+    background: whitesmoke;
+    color: #2c3e45;
+    text-decoration: none;
+    transition-duration: 1s;
+}
+
+.sub-menu a:hover {
+    color: #2c3e45;
+    transition-duration: 1s;
+}
+
+
+.sub-menu .sub-menu {
+    top: 0;
+    left: 100%;
+}
+
+/* Parametrização de corpo e formulário  */
+
+body {
+	margin: 0px;
+}
+
+.formulario {
+	padding: 2px;
+	margin: 0;
+	position: absolute;
+	left: 4.5%;
+	top: 28%;
+	text-align: center;
+	width: 90%;
+	font-size: 0.95em;
+	background: #ecf0f1;
+	padding: 0;
+	border-radius: 5px;
+	z-index: 2;
+
+}
+
+.formulario2 {
+	padding: 2px;
+	margin: 0;
+	position: absolute;
+	left: 4.5%;
+	top: 52.9%;
+	text-align: center;
+	width: 90%;
+	height: 37.9%;
+	font-size: 0.95em;
+	background: #ecf0f1;
+	padding: 0;
+	border-radius: 5px;
+	z-index: 2;
+}
+
+.formulario2 select {
+	
+	border-radius: 5px;
+
+}
+
+
+
+.formulario select {
+	
+	border-radius: 5px;
+
+}
+
+.formulario2 input[type='text'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario input[type='text'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario input[type='number'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario2 input[type='number'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario input[type='time'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario2 input[type='time'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario input[type='date'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario2 input[type='date'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario2 input[type='password'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario input[type='password'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario2 input[type='email'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario input[type='email'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario3 {
+	padding: 2px;
+	margin: 2px;
+	position: absolute;
+	left: 4.5%;
+	top: 25%;
+	text-align: center;
+	width: 90%;
+	height: 60%;
+	font-size: 0.95em;
+	background: #ecf0f1;
+	padding: 0;
+	border-radius: 5px;
+	z-index: 2;
+}
+
+.formulario3 h1{
+	font-size: 800%;
+}
+
+.formulario3 legend {
+	background: #bdc3c7;
+	font-weight: bolder;
+	color: #2980b9;
+	padding-bottom: 2px;
+	border-top-right-radius: 5px ;
+	border-top-left-radius: 5px ;
+	z-index: 2;
+}
+
+
+.formulario3 input[type='text'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario3 input[type='password'] {
+	
+	border-radius: 5px;
+
+}
+
+
+.formulario4 {
+	padding: 2px;
+	margin: 2px;
+	text-align: center;
+	font-size: 0.95em;
+	background: #ecf0f1;
+	border-radius: 5px;
+	z-index: 2;
+}
+
+.formulario4 h1{
+	z-index: 2;
+	font-size: 800%;
+}
+
+.formulario4 legend {
+	z-index: 2;
+	background: #bdc3c7;
+	font-weight: bolder;
+	color: #2980b9;
+	padding-bottom: 2px;
+	border-top-right-radius: 5px ;
+	border-top-left-radius: 5px ;
+	
+	width: 100%;
+}
+
+
+.formulario4 input[type='text'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario4 input[type='password'] {
+	
+	border-radius: 5px;
+
+}
+
+.btn_azul {
+	background: #3498db;
+	color: whitesmoke;
+}
+
+
+
+.btn_azul:hover {
+	background:  #34495e;
+	transition-duration: 0.7s;
+}
+
+
+
+
+
+.formulario legend {
+	background: #bdc3c7;
+	font-weight: bolder;
+	color: #2980b9;
+	padding-bottom: 1px;
+	border-top-right-radius: 5px ;
+	border-top-left-radius: 5px ;
+	z-index: 2;
+}
+
+.formulario2 legend {
+	background: #bdc3c7;
+	font-weight: bolder;
+	color: #2980b9;
+	padding-bottom: 1px;
+	border-top-right-radius: 5px ;
+	border-top-left-radius: 5px ;
+	z-index: 2;
+}
+
+
+.formulario5 {
+	padding: 2px;
+	margin: 0;
+	position: absolute;
+	left: 4.5%;
+	top: 75.8%;
+	text-align: center;
+	width: 90%;
+	font-size: 0.95em;
+	background: #ecf0f1;
+	padding: 0;
+	border-radius: 5px;
+	z-index: 2;
+
+}
+
+.formulario5 select {
+	
+	border-radius: 5px;
+
+}
+
+.formulario5 input[type='text'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario5 input[type='password'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario5 input[type='email'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario5 input[type='number'] {
+	
+	border-radius: 5px;
+
+}
+.formulario5 input[type='time'] {
+	
+	border-radius: 5px;
+
+}
+.formulario5 input[type='date'] {
+	
+	border-radius: 5px;
+
+}
+.formulario5 legend {
+	background: #bdc3c7;
+	font-weight: bolder;
+	color: #2980b9;
+	padding-bottom: 1px;
+	border-top-right-radius: 5px ;
+	border-top-left-radius: 5px ;
+	z-index: 2;
+}
+
+
+
+/* Cadastro unidade*/
+
+
+.form_cadastro_unidade {
+	padding: 4px;
+	position: absolute;
+	left: 4.5%;
+	top: 45%;
+	text-align: center;
+	width: 90%;
+	font-size: 0.95em;
+	background: #ecf0f1;
+	padding: 0;
+}
+
+
+.form_cadastro_unidade legend {
+	background: #bdc3c7;
+	font-weight: bolder;
+	color: #2980b9;
+	padding-bottom: 2px;
+	border-top-right-radius: 5px ;
+	border-top-left-radius: 5px ;
+	z-index: 2;
+}
+
+
+.form_cadastro_unidade input[type='text'] {
+	border-radius: 4px;
+}
+
+.form_cadastro_unidade input[type='date'] {
+	border-radius: 4px;
+}
+
+.form_cadastro_unidade input[type='number'] {
+	border-radius: 4px;
+}
+
+.form_cadastro_unidade input[type='email'] {
+	border-radius: 4px;
+}
+
+.form_cadastro_unidade input[type='password'] {
+	border-radius: 4px;
+}
+
+
+
+.form_cadastro_unidade select {
+	border-radius: 4px;
+}
+
+/* Parametrização do rodapé ou footer */
+
+.rodape {
+	width: 100%;
+	height: 50px;
+	padding: 0;
+	margin: 0;
+	background: #2980b9;
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+}
+
+.rodape p {
+	position: relative;
+	top: 20%;
+	color: rgba(2,47,93,1);;
+	font-weight: bolder;
+}
+
+.cadastro_existente {
+	color: black;
+	text-align: center;
+	background: #ecf0f1;
+	height: 300px;
+	width: 80%;
+	position: absolute;
+	left: 10%;
+	top: 35%;
+	border-radius: 5px;
+}
+
+.cadastro_existente h1 {
+	position: relative;
+	top: 38%;
+}
+
+.cadastro_existente b {
+	color: #34495e;
+}
+
+.cadastro_existente a {
+	color: #34495e;
+}
+
+.cadastro_existente a:hover {
+	color: #34495e;
+}
+
+.admin {
+	text-align: center;
+
+}
+
+.admin p {
+	background: #2980b9;
+	color: rgba(2,47,93,1);
+	font-weight: bolder;
+}
+
+.admin a {
+	background: #2980b9;
+	color: rgba(2,47,93,1);
+	font-weight: bolder;
+	text-decoration: underline;
+}
+
+.admin a:hover {
+	color: whitesmoke;
+}
+
+.usuario_senha{
+	width: 45%;
+	text-align: center;
+	position: relative;
+	left: 28%;
+}
+
+.hme  {
+	background:  #ecf0f1;
+	width: 80%;
+	height: 40%;
+	padding: 0;
+	margin-top: 5%;
+	position: relative;
+	left: 10%;
+	text-align: center;
+	border-radius: 5px;
+}
+.hme h5 {
+	text-align: center;
+}
+.hme h1 {
+	text-align: center;
+	font-weight: bolder;
+	font-size: 12em;
+}
+
+
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+  z-index: 0;
+}
+.col-sm, [class*="col-sm"] {
+    padding-right: 0;
+    padding-left: 0;
+    z-index: 0;
+}
+
+.selected {
+	background: #2c3e45;
+}
+
+.aprovacao  {
+	text-align: center;
+}
+
+.aprovacao th {
+	border: solid #d9dde2 1px;
+	font-size: 0.877em;
+	
+}
+
+.aprovacao td {
+	border: solid #d9dde2 1px;
+	font-size: 0.877em;
+	
+}
+
+.aprovacao th {
+	background: rgba(2,47,93,1);
+	color: whitesmoke;
+}
+
+.aprovacao tr:hover {
+	background: #d9dde2; /*#2980b9;*/
+	color: black;
+	transition-duration: 0.5s;
+}
+
+
+
+
+.container p {
+	text-align: center;
+	font-weight: bolder;
+	color:  rgba(2,47,93,1);
+}
+
+.barra {
+    height: 30%;
+    overflow: scroll;
+}
+
+.botao_centro {
+	text-align: center;
+}
