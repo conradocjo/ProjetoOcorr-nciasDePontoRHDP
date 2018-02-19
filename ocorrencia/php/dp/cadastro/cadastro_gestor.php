@@ -34,13 +34,9 @@
 				<?php
 					header("Content-type: text/html; charset=utf-8");
 					mb_internal_encoding("UTF-8"); 
-					mysql_set_charset('utf8');
-					$host = "localhost";
-					$usuario = "root";
-					$senha = "";
-					$bd = "ocorrencia";
-					#abre conexao com banco
-					$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+					#Conexao com Banco de dados
+					require_once "../../manutencao/conecta.php";
+					$conexao = conecta();
 					#dados da sessão
 					$usuario_sessao = isset($_SESSION['usuario'])?$_SESSION['usuario']:'';
  					$sql_select_nome_gestor = "SELECT nome FROM usuario_gestor WHERE usuario = '$usuario_sessao' ";
@@ -63,6 +59,7 @@
 					echo " <label><i class='fa fa-user-circle-o' aria-hidden='true'></i> Grupo: <select name='nivel'>
 								<option value='1'>Gestão</option>
 								<option value='2'>Administração</option>
+								<option value='3'>Segurança do Trabalho</option>
 						</select>";
 					#Input email
 					echo " <label><i class='fa fa-weixin' aria-hidden='true'></i> Email: <input placeholder='Digite um email válido . . .' type='email' style='width: 250px ' name='email' required='' ></label>";
@@ -76,6 +73,14 @@
 		</form><br>
 	</div><!-- Div formulario -->
  	<?php require_once"../../rodape.php";?>
+ 	<script src="../../../script/jquery-3.2.1.js" charset="utf-8"></script>
+	<script>
+		$(document).ready(function(){
+			$('.btn').click(function(){
+				$('.btn').text('Enviando dados, por favor aguarde...').addClass('btn_azul_efeito');
+			});
+		});
+	</script>
 </body>
 </html>
 

@@ -35,13 +35,9 @@
 
 					#require once para insert
 					require_once"../manutencao/abre_conexao.php";
-					#Dados para conexão com Banco para realizar Select:
-					$host = "localhost";
-					$usuario = "root";
-					$senha = "";
-					$bd = "ocorrencia";
-					#abre conexao com banco
-					$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+					#Conexao com Banco de dados
+					require_once "../manutencao/conecta.php";
+					$conexao = conecta();
 					#querys
 					$sql_matricula = "SELECT * FROM empregado WHERE matricula";
 					$sql_unidade = "SELECT * FROM unidade";
@@ -56,31 +52,11 @@
 					#Em baixo são inputs e selects de formulário
 
 					#Input matrícula do empregado
-					echo "<label><i class='fa fa-address-card-o' aria-hidden='true'></i> Digite a matricula do empregado: <input type='number' style='width: 200px ' name='matricula' placeholder='Digite a matrícula.' ></label> ";
+					echo "<label><i class='fa fa-address-card-o' aria-hidden='true'></i> Digite a matricula do empregado: <input type='number' style='width: 200px ' name='matricula' placeholder='Digite a matrícula.' required=''></label> ";
 					#Input nome empregado
-					echo "<label><i class='fa fa-user-o' aria-hidden='true'></i> Digite o nome correto do empregado: <input placeholder='Digite o nome do empregado . . .' type='text' style='width: 350px ' name='nome_empregado'></label><br>";
-					echo "<label><i class='fa fa-user-o' aria-hidden='true'></i> Digite uma senha: <input placeholder='Digite a senha do empregado . . .' type='password' style='width: 350px ' name='senha_empregado'></label><br>";
-					#Select Setor
-					echo "<br><label><i class='fa fa-users' aria-hidden='true'></i> Selecione o setor correto: 
-					<select name='setor'>";
-					while ($resultado2 = mysqli_fetch_array($select_setor)) {
-						echo "<option value='$resultado2[0]'>$resultado2[1]</option>";
-					}
-					echo"</select></label> ";
-					#Select Unidade
-					echo " <label><i class='fa fa-building-o' aria-hidden='true'></i> Selecione a unidade correta: 
-					<select name='unidade'>";
-					while ($resultado1 = mysqli_fetch_array($select_unidade)) {
-						echo "<option value='$resultado1[0]'>$resultado1[1]</option>";
-					}
-					echo"</select></label> ";
-					#Select Gestor
-					echo " <label><i class='fa fa-user-o' aria-hidden='true'></i> Selecione o gestor correto: 
-					<select name='gestor'>";
-					while ($resultado = mysqli_fetch_array($select_gestor)) {
-						echo "<option value='$resultado[0]'>$resultado[0]</option>	";
-					}
-					echo"</select></label> ";
+					echo "<label><i class='fa fa-user-o' aria-hidden='true'></i> Digite o nome correto do empregado: <input placeholder='Digite o nome do empregado . . .' type='text' style='width: 350px ' name='nome_empregado' required=''></label><br>";
+					echo "<label><i class='fa fa-user-o' aria-hidden='true'></i> Digite uma senha: <input placeholder='Digite a senha do empregado . . .' type='password' style='width: 350px ' name='senha_empregado' required=''></label><br>";
+					
 					echo "<input type='hidden' name='rastro' value = '$usuario_sessao' >";
 				?>
 		</fieldset><br>
@@ -88,6 +64,14 @@
 		</form><br>
 	</div><!-- Div formulario -->
  	<?php require_once"../rodape.php";?>
+ 	<script src="../../script/jquery-3.2.1.js" charset="utf-8"></script>
+	<script>
+		$(document).ready(function(){
+			$('.btn').click(function(){
+				$('.btn').text('Enviando dados, por favor aguarde...').addClass('btn_azul_efeito');
+			});
+		});
+	</script>
 </body>
 </html>
 <?php

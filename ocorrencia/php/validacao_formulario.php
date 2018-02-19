@@ -1,21 +1,16 @@
 <?php
 	header("Content-type: text/html; charset=utf-8");
 	mb_internal_encoding("UTF-8"); 
-	mysql_set_charset('utf8');
+	
 
 		// Verifica se houve POST e se o usuário ou a senha é(são) vazio(s)
  		 if (!empty($_POST) AND (empty($_POST['matricula']) OR empty($_POST['senha_funcionario']))) {
      		 header("Location: ../index.php"); exit;
  		 }
 
-	#require once para insert
-	#Dados para conexão com Banco para realizar Select:
-	$host = "localhost";
-	$user_bd = "root";
-	$pass_bd = "";
-	$bd = "ocorrencia";
-	#abre conexao com banco
-	$conexao = mysqli_connect($host, $user_bd, $pass_bd, $bd);
+	#Conexao com Banco de dados
+      require_once "manutencao/conecta.php";
+      $conexao = conecta();
 	#Valida dados do post
 	$matricula = isset($_POST['matricula'])?$_POST['matricula']:'';
 	$senha_funcionario = isset($_POST['senha_funcionario'])?$_POST['senha_funcionario']:'';
@@ -27,7 +22,6 @@
  	 	if ($valida = mysqli_num_rows($testa_dados)) {
     // Mensagem de erro quando os dados são inválidos e/ou o usuário não foi encontrado
  		// Salva os dados encontrados na variável $resultado
-    	$resultado = mysql_fetch_assoc($testa_dados);  	
       	// Se a sessão não existir, inicia uma
       	if (!isset($_SESSION)) session_start();
         while ($resultado2 = mysqli_fetch_array($testa_dados)) {
@@ -40,8 +34,9 @@
 
       
   	} else {
-    	echo "Matrícula ou senha inválida!"; exit;
-    	echo '$matricula, $senha_funcionario';
+    	echo "<script>
+                alert('Mátricula ou senha inválidos');
+            </script>"; exit;
   }
 
   	// A sessão precisa ser iniciada em cada página diferente

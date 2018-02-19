@@ -27,29 +27,25 @@
 		  </header>";
 	?>
 	<?php require_once"../../menu2.php";?>
-	<div class="container" style='overflow: auto; height: 420px'>
+	<div class="container" style='overflow: auto; height: 400px'>
 		
 			
 		<?php
 			#dados para conexão com Banco de dados.
 			header("Content-type: text/html; charset=utf-8");
 			mb_internal_encoding("UTF-8"); 
-			mysql_set_charset('utf8');
+			
 			#require once para insert
 			require_once"../../manutencao/abre_conexao.php";
-			#Dados para conexão com Banco para realizar Select:
-			$host = "localhost";
-			$usuario = "root";
-			$senha = "";
-			$bd = "ocorrencia";
-			#abre conexao com banco
-			$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+			#Conexao com Banco de dados
+			require_once "../../manutencao/conecta.php";
+			$conexao = conecta();
 			#dados da sessão
 			$usuario = isset($_SESSION['usuario'])?$_SESSION['usuario']:'';
  			
  			
 
- 			$sql_select_ocorrencia2 = "SELECT  ocorrencia.id, empregado.nome, ocorrencia.setor, ocorrencia.unidade, ocorrencia.status,  ocorrencia.justificativa,ocorrencia.data_ocorrencia, ocorrencia.primeira_entrada, ocorrencia.primeira_saida, ocorrencia.segunda_entrada, ocorrencia.segunda_saida, ocorrencia.data_hora, ocorrencia.assinado from ocorrencia  INNER JOIN usuario_gestor ON  ocorrencia.fk_usuario_gestor = usuario_gestor.id INNER JOIN empregado ON ocorrencia.fk_empregado = empregado.id WHERE usuario = '$usuario' AND assinado = 1 ";
+ 			$sql_select_ocorrencia2 = "SELECT empregado.nome, empregado.matricula, ocorrencia.setor, ocorrencia.unidade, ocorrencia.status,  ocorrencia.justificativa,DATE_FORMAT(ocorrencia.data_ocorrencia,'%d/%m/%Y'), ocorrencia.primeira_entrada, ocorrencia.primeira_saida, ocorrencia.segunda_entrada, ocorrencia.segunda_saida, DATE_FORMAT(ocorrencia.data_hora, '%d/%m/%Y %H:%i:%s'), ocorrencia.assinado from ocorrencia  INNER JOIN usuario_gestor ON  ocorrencia.fk_usuario_gestor = usuario_gestor.id INNER JOIN empregado ON ocorrencia.fk_empregado = empregado.id WHERE usuario = '$usuario' AND assinado = 1 OR assinado = 3 ORDER BY ocorrencia.data_ocorrencia";
 
 
  			$sql_select_nome_gestor = "SELECT nome FROM usuario_gestor WHERE usuario = '$usuario' ";
@@ -65,8 +61,9 @@
 							<table class='aprovacao'>
 									<thead>
 										<tr>
-											<th>ID</th>
+											
 											<th><i class='fa fa-user-o' aria-hidden='true'></i> Empregado</th>
+											<th><i class='fa fa-id-card-o' aria-hidden='true'></i> Matrícula</th>
 											<th><i class='fa fa-users' aria-hidden='true'></i> Setor</th>
 											<th><i class='fa fa-building-o' aria-hidden='true'></i> Unidade</th>
 											<th><i class='fa fa-file-text-o' aria-hidden='true'></i> Motivo</th>
@@ -96,7 +93,11 @@
 												}
 
 												if ($resultado3[12] == '1') {
-													echo"<td>Ocorrência Aprovada</td>";
+													echo"<td>Ocorrência encaminhada ao DP</td>";
+												}
+
+												if ($resultado3[12] == '3') {
+													echo"<td>Ocorrência encaminhada para SDT</td>";
 												}
 										
 												echo"</tr>";		
@@ -109,7 +110,7 @@
 							</div>
 						";
  					} else {
- 						echo "<div class='dado_existente'><h1>Você não tem ocorrencias.</h1></div>";
+ 						echo "<div class='cadastro_existente'><h1>Você não tem ocorrencias.</h1></div>";
  					}
 
 		?>

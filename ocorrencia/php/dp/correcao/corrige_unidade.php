@@ -39,14 +39,10 @@
 						#dados para conexão com Banco de dados.
 						header("Content-type: text/html; charset=utf-8");
 						mb_internal_encoding("UTF-8"); 
-						mysql_set_charset('utf8');
-						#Dados para conexão com Banco para realizar Select:
-						$host = "localhost";
-						$usuario = "root";
-						$senha = "";
-						$bd = "ocorrencia";
-						#abre conexao com banco
-						$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+						
+						#Conexao com Banco de dados
+						require_once "../../manutencao/conecta.php";
+						$conexao = conecta();
 						#dados da sessão
 						$usuario_sessao = isset($_SESSION['usuario'])?$_SESSION['usuario']:'';
  						$sql_select_nome_gestor = "SELECT nome FROM usuario_gestor WHERE usuario = '$usuario_sessao' ";
@@ -82,6 +78,14 @@
 		
 	</div><!-- Div formulario -->
  	<?php require_once"../../rodape.php";?>
+ 	<script src="../../../script/jquery-3.2.1.js" charset="utf-8"></script>
+	<script>
+		$(document).ready(function(){
+			$('.btn').click(function(){
+				$('.btn').text('Enviando dados, por favor aguarde...').addClass('btn_azul_efeito');
+			});
+		});
+	</script>
 </body>
 </html>
 

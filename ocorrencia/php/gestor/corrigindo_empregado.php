@@ -32,52 +32,36 @@
 		<?php
 			header("Content-type: text/html; charset=utf-8");
 			mb_internal_encoding("UTF-8"); 
-			mysql_set_charset('utf8');
+			
 
 			#require once para insert
 			require_once"../manutencao/abre_conexao.php";
-			#Dados para conexão com Banco para realizar Select:
-			$host = "localhost";
-			$usuario = "root";
-			$senha = "";
-			$bd = "ocorrencia";
-			#abre conexao com banco
-			$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+			#Conexao com Banco de dados
+			require_once "../manutencao/conecta.php";
+			$conexao = conecta();
 			#manipula post
 			$matricula = isset($_POST["matricula"])?$_POST["matricula"]:"";
 			$nome_empregado = isset($_POST["nome_empregado"])?$_POST["nome_empregado"]:"";
-			$setor = isset($_POST["setor"])?$_POST["setor"]:"";
-			$unidade = isset($_POST["unidade"])?$_POST["unidade"]:"";
-			$gestor = isset($_POST["gestor"])?$_POST["gestor"]:"";
 			$senha_empregado = isset($_POST["senha_empregado"])?$_POST["senha_empregado"]:"";
 			$rastro = isset($_POST["rastro"])?$_POST["rastro"]:"";
 			#querys
+			$select_dados2 = "SELECT * FROM empregado WHERE matricula = '$matricula' ";
+			$testa_dados = mysqli_query($conexao, $select_dados2);
 			
-			
-
-			$select_dados = "SELECT * FROM empregado WHERE matricula='$matricula' ";
-			$testa_dados = mysqli_query($conexao, $select_dados);
-			$select_dados2 = "SELECT * FROM usuario_gestor WHERE matricula = '$matricula' ";
-			$select_gestor = "SELECT id FROM usuario_gestor WHERE nivel = 1 AND nome = '$gestor' ";
-			$result_gestor = mysqli_query($conexao, $select_gestor);
-			
-			
-
-
 			if ($validacao = mysqli_num_rows($testa_dados)){
-				while ($rf = mysqli_fetch_array($result_gestor)) {
-				$insert_dados = "UPDATE empregado SET matricula ='$matricula', nome = '$nome_empregado', superior_imediato_id = '$gestor',  fk_unidade = '$unidade', fk_setor = '$setor', usuario_rastro_criacao = '$rastro', senha =  md5('$senha_empregado'), superior_imediato_id ='$rf[0]', superior_imediato ='$gestor' WHERE matricula = '$matricula' ";
+				while ($rf = mysqli_fetch_array($testa_dados)) {
+				$insert_dados = "UPDATE empregado SET matricula ='$matricula', nome = '$nome_empregado', usuario_rastro_atualizacao = '$rastro', senha =  md5('$senha_empregado') WHERE matricula = '$matricula' ";
 				insert($insert_dados);
 			}
 			
 				
 				echo "<div class='cadastro_existente'><h1>Empregado $nome_empregado alterado com sucesso. <a href='javascript:history.back()'>Clique aqui</a> para voltar.</h1></div>";
 			}else{
-				if($setor==""){
-					echo "<div class='dado_existente'><h1>Dados não foram preenchidos. <a href='javascript:history.back()'>Clique aqui</a> para voltar.</h1></div>";
+				if($matricula==""){
+					echo "<div class='cadastro_existente'><h1>Dados não foram preenchidos. <a href='javascript:history.back()'>Clique aqui</a> para voltar.</h1></div>";
 				}else{
 					
-					echo "<div class='cadastro_realizado'<h1>Empregado $nome_empregado não encontrado. <i class='fa fa-smile-o' aria-hidden='true'></i></h1></div>";
+					echo "<div class='cadastro_existente'><h1>Empregado $nome_empregado não encontrado. </h1></div>";
 				}
 			}
 		

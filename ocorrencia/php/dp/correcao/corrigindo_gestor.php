@@ -32,17 +32,14 @@
 		<?php
 			header("Content-type: text/html; charset=utf-8");
 			mb_internal_encoding("UTF-8"); 
-			mysql_set_charset('utf8');
+			
 
 			#require once para insert
 			require_once"../../manutencao/abre_conexao.php";
 			#Dados para conexão com Banco para realizar Select:
-			$host = "localhost";
-			$usuario = "root";
-			$senha = "";
-			$bd = "ocorrencia";
-			#abre conexao com banco
-			$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+			#Conexao com Banco de dados
+			require_once "../../manutencao/conecta.php";
+			$conexao = conecta();
 			#manipula post
 			$user_post = isset($_POST['usuario'])?$_POST['usuario']:'';
 			$usuario_sessao = isset($_SESSION['usuario'])?$_SESSION['usuario']:'';
@@ -61,7 +58,7 @@
 									<legend>Alterar nome</legend>
 										<label><i class='fa fa-address-card-o' aria-hidden='true'></i> Nome: <input type='text' style='width: 250px ' name='nome' placeholder='Digite seu nome . . .' required='' ></label><br>
 										<input type='hidden' name='user_post' value='$user_post'>
-										<button type='submit' class='btn btn_azul'><i class='fa fa-pencil-square-o' aria-hidden='true'></i> Alterar Nome</button>
+										<button id='nome' type='submit' class='btn btn_azul'><i class='fa fa-pencil-square-o' aria-hidden='true'></i> Alterar Nome</button>
 								</fieldset>	
 							</form>
    				 </div>
@@ -79,7 +76,7 @@
 									echo"</select>
 
 									<label><i class='fa fa-user-o' aria-hidden='true'></i> Usuário(a): <input placeholder='Digite o nome do usuário(a) . . .' type='text' style='width: 250px ' name='usuario' required='' ></label><br>
-									<button type='submit' class='btn btn_azul'><i class='fa fa-pencil-square-o' aria-hidden='true'></i> Alterar Usuário</button>
+									<button id='usuario' type='submit' class='btn btn_azul'><i class='fa fa-pencil-square-o' aria-hidden='true'></i> Alterar Usuário</button>
 							</fieldset>	
 
 					</form>
@@ -91,7 +88,7 @@
 								<legend>Alterar senha</legend>
 									<label><i class='fa fa-user-o' aria-hidden='true'></i> Senha: <input placeholder='Digite uma senha . . .' type='password' style='width: 350px ' name='senha' required='' ></label><br>
 									<input type='hidden' name='user_post' value='$user_post'>
-									<button type='submit' class='btn btn_azul'><i class='fa fa-pencil-square-o' aria-hidden='true'></i> Alterar Senha</button>
+									<button id='senha' type='submit' class='btn btn_azul'><i class='fa fa-pencil-square-o' aria-hidden='true'></i> Alterar Senha</button>
 							</fieldset>	
 					</form>
     			</div>
@@ -101,7 +98,7 @@
 								<legend>Alterar Email</legend>
 									<label><i class='fa fa-user-o' aria-hidden='true'></i> Senha: <input placeholder='Digite o email corretamente . . .' type='email' style='width: 350px ' name='email' required='' ></label><br>
 									<input type='hidden' name='user_post' value='$user_post'>
-									<button type='submit' class='btn btn_azul'><i class='fa fa-pencil-square-o' aria-hidden='true'></i> Alterar Email</button>
+									<button id='email' type='submit' class='btn btn_azul'><i class='fa fa-pencil-square-o' aria-hidden='true'></i> Alterar Email</button>
 							</fieldset>	
 
 					</form>
@@ -113,7 +110,8 @@
 									<input type='hidden' name='user_post' value='$user_post'>
 									<label><i class='fa fa-users' aria-hidden='true'></i> Gestor <input type = 'radio' name = 'grupo' value = '1'></label><br>
 									<label><i class='fa fa-users' aria-hidden='true'></i> Administrador <input type = 'radio' name = 'grupo' value = '2'></label><br>
-									<button type='submit' class='btn btn_azul'><i class='fa fa-pencil-square-o' aria-hidden='true'></i> Alterar Grupo</button>
+									<label><i class='fa fa-users' aria-hidden='true'></i> Segurança do Trabalho <input type = 'radio' name = 'grupo' value = '3'></label><br>
+									<button id='grupo' type='submit' class='btn btn_azul'><i class='fa fa-pencil-square-o' aria-hidden='true'></i> Alterar Grupo</button>
 							</fieldset>	
 
 					</form>
@@ -133,6 +131,40 @@
 		?>
 	
  	<?php require_once"../../rodape.php";?>
+
+ 	<script src="../../../script/jquery-3.2.1.js" charset="utf-8"></script>
+	<script>
+		$(document).ready(function(){
+			$('#nome').click(function(){
+				$('#nome').text('Alterando nome, por favor aguarde...').addClass('btn_azul_efeito');
+			});
+		});
+
+		$(document).ready(function(){
+			$('#usuario').click(function(){
+				$('#usuario').text('Alterando usuário, por favor aguarde...').addClass('btn_azul_efeito');
+			});
+		});
+
+		$(document).ready(function(){
+			$('#senha').click(function(){
+				$('#senha').text('Alterando senha, por favor aguarde...').addClass('btn_azul_efeito');
+			});
+		});
+
+		$(document).ready(function(){
+			$('#email').click(function(){
+				$('#email').text('Alterando email, por favor aguarde...').addClass('btn_azul_efeito');
+			});
+		});
+
+		$(document).ready(function(){
+			$('#grupo').click(function(){
+				$('#grupo').text('Alterando grupo, por favor aguarde...').addClass('btn_azul_efeito');
+			});
+		});
+
+	</script>
 </body>
 </html>
 

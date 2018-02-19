@@ -1,21 +1,16 @@
 <?php
 	header("Content-type: text/html; charset=utf-8");
 	mb_internal_encoding("UTF-8"); 
-	mysql_set_charset('utf8');
+	
 
 		// Verifica se houve POST e se o usuário ou a senha é(são) vazio(s)
  		 if (!empty($_POST) AND (empty($_POST['usuario']) OR empty($_POST['senha']))) {
      		 header("Location: ../index.php"); exit;
  		 }
 
-	#require once para insert
-	#Dados para conexão com Banco para realizar Select:
-	$host = "localhost";
-	$user_bd = "root";
-	$pass_bd = "";
-	$bd = "ocorrencia";
-	#abre conexao com banco
-	$conexao = mysqli_connect($host, $user_bd, $pass_bd, $bd);
+	#Conexao com Banco de dados
+      require_once "manutencao/conecta.php";
+      $conexao = conecta();
 	#Valida dados do post
 	$usuario = isset($_POST['usuario'])?$_POST['usuario']:'';
 	$senha = isset($_POST['senha'])?$_POST['senha']:'';
@@ -29,7 +24,7 @@
  	if ($valida = mysqli_num_rows($testa_dados)) {
     // Mensagem de erro quando os dados são inválidos e/ou o usuário não foi encontrado
  		// Salva os dados encontrados na variável $resultado
-    	$resultado = mysql_fetch_assoc($testa_dados);  	
+    	
       	// Se a sessão não existir, inicia uma
       	if (!isset($_SESSION)) session_start();
         while ($resultado2 = mysqli_fetch_array($testa_dados)) {
@@ -44,24 +39,11 @@
 
       
   	} else {
-    	echo "Usuário ou senha inválidos!"; exit;
+    	echo "<script>
+                alert('Usuário ou senha inválidos');
+            </script>"; exit;
   }
 
-  	// A sessão precisa ser iniciada em cada página diferente
-
-
-
-  /* 
-  $nivel_necessario = 2;
-   
-  // Verifica se não há a variável da sessão que identifica o usuário
-  if (!isset($_SESSION['UsuarioID']) OR ($_SESSION['UsuarioNivel'] <$nivel_necessario)) {
-      // Destrói a sessão por segurança
-      session_destroy();
-      // Redireciona o visitante de volta pro login
-      header("Location: index.php"); exit;
-  }
-*/
 
   session_destroy();
 

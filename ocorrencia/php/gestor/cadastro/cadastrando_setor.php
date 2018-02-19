@@ -35,13 +35,9 @@
 
 			#require once para insert
 			require_once"../../manutencao/abre_conexao.php";
-			#Dados para conexão com Banco para realizar Select:
-			$host = "localhost";
-			$usuario = "root";
-			$senha = "";
-			$bd = "ocorrencia";
-			#abre conexao com banco
-			$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+			#Conexao com Banco de dados
+			require_once "../../manutencao/conecta.php";
+			$conexao = conecta();
 			#manipula post
 			$setor = isset($_POST['setor'])?$_POST['setor']:'';
 			$rastro = isset($_POST['rastro'])?$_POST['rastro']:'';

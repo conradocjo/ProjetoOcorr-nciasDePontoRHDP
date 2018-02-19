@@ -4,4 +4,9 @@
 		session_destroy();
 		header("Location: /ocorrencia/index.php"); exit;
 	}
+
+	if ( ($_SESSION['logado'] == 1) && ( $_SESSION['nivel'] == 3 ) ){
+		session_destroy();
+		header("Location: /ocorrencia/index.php"); exit;
+	}
 ?>

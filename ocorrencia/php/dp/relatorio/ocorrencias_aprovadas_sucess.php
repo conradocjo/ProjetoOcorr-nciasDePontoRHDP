@@ -34,16 +34,13 @@
 			#dados para conexão com Banco de dados.
 			header("Content-type: text/html; charset=utf-8");
 			mb_internal_encoding("UTF-8"); 
-			mysql_set_charset('utf8');
+			
 			#require once para insert
 			require_once"../../manutencao/abre_conexao.php";
 			#Dados para conexão com Banco para realizar Select:
-			$host = "localhost";
-			$usuario = "root";
-			$senha = "";
-			$bd = "ocorrencia";
-			#abre conexao com banco
-			$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+			#Conexao com Banco de dados
+			require_once "../../manutencao/conecta.php";
+			$conexao = conecta();
 			#dados da sessão
 			$usuario = isset($_SESSION['usuario'])?$_SESSION['usuario']:'';
  			#POST
@@ -55,7 +52,7 @@
  			$insert = "UPDATE ocorrencia SET assinado = '$dar_baixa', rastro = '$usuario_sessao'  WHERE id = '$id_ocorrencia'  ";
 
  			if($id_ocorrencia==""){
-					echo "<div class='dado_existente'><h1>Dados não foram preenchidos. <a href='javascript:history.back()'>Clique aqui</a> para voltar.</h1></div>";
+					echo "<div class='cadastro_existente'><h1>Dados não foram preenchidos. <a href='javascript:history.back()'>Clique aqui</a> para voltar.</h1></div>";
 				}else{
 					insert($insert);
 					header("Location: ocorrencias_aprovadas.php");

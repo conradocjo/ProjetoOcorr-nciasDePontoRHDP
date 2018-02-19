@@ -11,22 +11,41 @@
 </head>
  
 <body>
-	<?php require_once"cabecalho.php";?>
-	<div class="subcabecalho"><h1></h1>
+
+		<?php require_once"cabecalho.php";?>
+		<div class="subcabecalho"><h1>Módulo dos Administradores</h1></div>
+
+	
+	<div class="subcabecalho">
+		
+
+	</div>
+	<div class="admin">
+		<?php
+			require_once"../../php/menu3.php";
+		?>
 	</div>
 	<div>
-	<form class="formulario3" action="validacao.php" method="post" accept-charset="utf-8">
+	<form class="formulario3" action="valida_teste.php" method="post" accept-charset="utf-8">
 		<fieldset>
 			<legend>Administração</legend>
 			<h5>Insira o usuário e senha para entrar.</h5>
 			<br><br><h1><i class="fa fa-user-circle" aria-hidden="true"></i></h1>
 		<label><input placeholder="Digite seu usuário . . ." type="text" name="usuario"></label><br>
 		<label><input placeholder="Digite sua senha . . ." type="password" name="senha"></label><br>
-		<button type="submit" class="btn btn_azul"><i class="fa fa-key" aria-hidden="true"></i> Entrar </button>
+		<button id='logar' type="submit" class="btn btn_azul"><i class="fa fa-key" aria-hidden="true"></i> Entrar </button>
 		</fieldset><br>
 	</form>
 
 	</div><!-- Div formulario -->
  	<?php require_once"../../php/rodape.php";?>
+ 	<script src="../../script/jquery-3.2.1.js" charset="utf-8"></script>
+	<script>
+		$(document).ready(function(){
+			$('#logar').click(function(){
+				$('#logar').text('Carregando...').addClass('btn_azul_efeito');
+			});
+		});
+	</script>
 </body>
 </html>

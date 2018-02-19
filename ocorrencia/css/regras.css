@@ -2,13 +2,17 @@
 .cabecalho_cadastro{
 	text-align: center;
 	width: 100%;
-	height: 150px;
+	height: 140px;
 	padding: 0;
 	margin: 0;
-	/*background: #3498db;*/
 	font-weight: bolder;
 	background: #eaedf2;
-	color: #34495e;
+	color: rgb(2, 47, 93);
+}
+
+.centraliza_relatorio {
+	position: absolute;
+	left: 27%;
 }
 
 #header {
@@ -16,8 +20,7 @@
 	height: 150px;
 	padding: 0;
 	margin: 0;
-	/*background:  #3498db;*/
-	background:  #3498db;
+	background:  #eaedf2;
 }
 
 #header img {
@@ -45,10 +48,9 @@
 
 #header2 {
 	width: 100%;
-	height: 150px;
+	height: 30%;
 	padding: 0;
 	margin: 0;
-	/*background:  #3498db;*/
 	background:  #3498db;
 }
 
@@ -59,9 +61,9 @@
 }
 
 #header2 p {
-	position: absolute;
+	position: relative;
 	left: 41.4%;
-	top: 16.8%;
+	top: 10.8%;
 	color:  #34495e;
 	font-weight: bolder;
 }
@@ -81,7 +83,7 @@
 }
 
 .subcabecalho h1 {
-	   text-shadow: 2px 2px #2c3e50;
+	   text-shadow: 2px  #2c3e50;
 }
 
 /* Parametrização do menu */
@@ -91,6 +93,7 @@ body,
 .sub-menu {
     margin: 0;
     padding: 0;
+
 }
 .clearfix:after{
     content: '.';
@@ -105,19 +108,19 @@ body,
 .menu,
 .sub-menu {
     list-style: none;
-    background: #2980b9;
+    background: rgb(2, 47, 93);
 }
 .sub-menu {
-    background: rgba(44, 62, 80, 0.8);
+    background: rgba(2, 30, 62, 0.8);
     z-index: 1;
 }
 .menu a {
     text-decoration: none;
     display: block;
-    padding: 10px;
+    padding: 9px;
     color: #fff;
     font-family: sans-serif;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     font-weight: 700;
 }
@@ -149,7 +152,7 @@ body,
 .sub-menu {
     display: none;
     position: absolute;
-    min-width: 150px;
+    min-width: 27%;
     text-decoration: none;
 }
 .sub-menu li:hover {
@@ -173,18 +176,18 @@ body,
 /* Parametrização de corpo e formulário  */
 
 body {
-	margin: 0px;
+	margin: 0;
 }
 
 .formulario {
-	padding: 2px;
+	padding: 1px;
 	margin: 0;
-	position: absolute;
+	position: relative;
 	left: 4.5%;
-	top: 28%;
+	top: 25%;
 	text-align: center;
 	width: 90%;
-	font-size: 0.95em;
+	font-size: 0.90em;
 	background: #ecf0f1;
 	padding: 0;
 	border-radius: 5px;
@@ -235,6 +238,12 @@ body {
 }
 
 .formulario input[type='number'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario input[type='file'] {
 	
 	border-radius: 5px;
 
@@ -295,29 +304,32 @@ body {
 }
 
 .formulario3 {
-	padding: 2px;
-	margin: 2px;
-	position: absolute;
+	padding-bottom: 1%;
+	margin-top: 1.2%;
+	position: relative;
 	left: 4.5%;
-	top: 25%;
+	top: 30%;
 	text-align: center;
 	width: 90%;
 	height: 60%;
 	font-size: 0.95em;
 	background: #ecf0f1;
-	padding: 0;
 	border-radius: 5px;
 	z-index: 2;
 }
 
 .formulario3 h1{
-	font-size: 800%;
+	font-size: 7em;
+}
+
+.formulario3 p{
+	font-size: 1em;
 }
 
 .formulario3 legend {
 	background: #bdc3c7;
 	font-weight: bolder;
-	color: #2980b9;
+	color: rgba(2,47,93,1);
 	padding-bottom: 2px;
 	border-top-right-radius: 5px ;
 	border-top-left-radius: 5px ;
@@ -326,6 +338,24 @@ body {
 
 
 .formulario3 input[type='text'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario3 input[type='password'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario3 input[type='number'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario3 input[type='email'] {
 	
 	border-radius: 5px;
 
@@ -357,7 +387,7 @@ body {
 	z-index: 2;
 	background: #bdc3c7;
 	font-weight: bolder;
-	color: #2980b9;
+	color: rgba(2,47,93,1);
 	padding-bottom: 2px;
 	border-top-right-radius: 5px ;
 	border-top-left-radius: 5px ;
@@ -379,25 +409,31 @@ body {
 }
 
 .btn_azul {
-	background: #3498db;
+	background: rgb(2, 47, 93);
 	color: whitesmoke;
-}
-
-
-
-.btn_azul:hover {
-	background:  #34495e;
 	transition-duration: 0.7s;
 }
 
 
 
+.btn_azul:hover {
+	background: #2c3e45;
+	transition-duration: 0.7s;
+	
+}
+
+
+.btn_azul_efeito {
+	background: #7f8c8d;
+	color: whitesmoke;
+	border-color: #dddcf7;
+}
 
 
 .formulario legend {
 	background: #bdc3c7;
 	font-weight: bolder;
-	color: #2980b9;
+	color: rgba(2,47,93,1);
 	padding-bottom: 1px;
 	border-top-right-radius: 5px ;
 	border-top-left-radius: 5px ;
@@ -407,7 +443,7 @@ body {
 .formulario2 legend {
 	background: #bdc3c7;
 	font-weight: bolder;
-	color: #2980b9;
+	color: rgba(2,47,93,1);
 	padding-bottom: 1px;
 	border-top-right-radius: 5px ;
 	border-top-left-radius: 5px ;
@@ -420,7 +456,7 @@ body {
 	margin: 0;
 	position: absolute;
 	left: 4.5%;
-	top: 75.8%;
+	top: 78.8%;
 	text-align: center;
 	width: 90%;
 	font-size: 0.95em;
@@ -473,11 +509,94 @@ body {
 .formulario5 legend {
 	background: #bdc3c7;
 	font-weight: bolder;
-	color: #2980b9;
+	color: rgba(2,47,93,1);
 	padding-bottom: 1px;
 	border-top-right-radius: 5px ;
 	border-top-left-radius: 5px ;
 	z-index: 2;
+}
+
+
+.formulario6 {
+	padding: 2px;
+	margin: 0;
+	position: absolute;
+	left: 4.5%;
+	top: 87%;
+	text-align: center;
+	width: 90%;
+	font-size: 0.95em;
+	background: rgba(255, 255, 255, 0);
+	padding: 0;
+	border-radius: 5px;
+	z-index: 2;
+
+}
+
+.formulario7 {
+	padding: 2px;
+	margin: 0;
+	position: absolute;
+	left: 4.5%;
+	top: 79%;
+	text-align: center;
+	width: 90%;
+	font-size: 0.95em;
+	background: rgba(255, 255, 255, 0);
+	padding: 0;
+	border-radius: 5px;
+	z-index: 2;
+
+}
+
+
+.formulario_relat {
+	padding: 0%;
+	text-align: center;
+	border-radius: 5px;
+}
+
+
+.formulario_relat input[type='text'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario_relat input[type='date'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario_relat select {
+	
+	border-radius: 5px;
+
+}
+
+.formulario_relat input[type='password'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario_relat input[type='number'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario_relat input[type='email'] {
+	
+	border-radius: 5px;
+
+}
+
+.formulario_relat input[type='password'] {
+	
+	border-radius: 5px;
+
 }
 
 
@@ -501,7 +620,7 @@ body {
 .form_cadastro_unidade legend {
 	background: #bdc3c7;
 	font-weight: bolder;
-	color: #2980b9;
+	color: rgba(2,47,93,1);
 	padding-bottom: 2px;
 	border-top-right-radius: 5px ;
 	border-top-left-radius: 5px ;
@@ -539,10 +658,10 @@ body {
 
 .rodape {
 	width: 100%;
-	height: 50px;
-	padding: 0;
+	height: 39px;
+	padding-bottom: 2.99%;
 	margin: 0;
-	background: #2980b9;
+	background:rgb(2, 47, 93);
 	position: absolute;
 	bottom: 0;
 	text-align: center;
@@ -551,8 +670,8 @@ body {
 .rodape p {
 	position: relative;
 	top: 20%;
-	color: rgba(2,47,93,1);;
-	font-weight: bolder;
+	color: white;
+	
 }
 
 .cadastro_existente {
@@ -590,14 +709,14 @@ body {
 }
 
 .admin p {
-	background: #2980b9;
-	color: rgba(2,47,93,1);
+	background: rgba(2,47,93,1);
+	color: white;
 	font-weight: bolder;
 }
 
 .admin a {
-	background: #2980b9;
-	color: rgba(2,47,93,1);
+	background: rgba(2,47,93,1);
+	color: white;
 	font-weight: bolder;
 	text-decoration: underline;
 }
@@ -633,8 +752,6 @@ body {
 	font-size: 12em;
 }
 
-
-
 .no-gutters {
   margin-right: 0;
   margin-left: 0;
@@ -647,7 +764,7 @@ body {
 }
 
 .selected {
-	background: #2c3e45;
+	background: rgb(6, 9, 15);
 }
 
 .aprovacao  {
@@ -666,6 +783,7 @@ body {
 	
 }
 
+
 .aprovacao th {
 	background: rgba(2,47,93,1);
 	color: whitesmoke;
@@ -678,7 +796,17 @@ body {
 }
 
 
+.container_relatorios {
+	margin-top: 5%;
+	margin-bottom:  2%;
+}
 
+.container_relatorios2 {
+	margin-top: 10%;
+	margin-bottom:  2%;
+	position: relative ;
+	left: 6.4%;
+}
 
 .container p {
 	text-align: center;
@@ -694,3 +822,123 @@ body {
 .botao_centro {
 	text-align: center;
 }
+
+
+.div_btn_relatorio{
+	height: 30%;
+}
+
+.btn_relatorio {
+	background: rgba(2,47,93,1);
+	color: whitesmoke;
+}
+
+
+
+.btn_relatorio:hover {
+	background:  #34495e;
+	transition-duration: 0.7s;
+}
+
+
+
+
+.relatorios {
+	background: #3498db;
+	color: white;
+	border-radius: 5px;
+	border: 1px solid #eaedf2;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-size: 1em;
+	transition-duration: 1.2s;
+	padding: 2%;
+	margin: 2%;
+
+}
+
+.relatorios:hover {
+	text-decoration: none;
+	color: #3498db;
+	background: #eaedf2;
+}
+
+.relatorios a {
+	color: white;
+	font-size: 1.5em;
+	text-align: center;
+	padding: 2%;
+	margin: 2%;
+}
+
+.relatorios a:hover {
+	text-decoration: none;
+}
+
+
+
+
+.grid_teste {
+	background: red;
+	color: white;
+}
+
+.grid_teste2 {
+	background: #025601;
+	color: white;
+}
+
+
+.grid_teste3 {
+	background: #7300e6;
+	color: white;
+}
+
+.divisao_relatorio {
+	margin-bottom: 10%;
+}
+
+.btn-relatorio {
+	background: rgba(2,47,93,1);
+	color: whitesmoke;
+	transition-duration: 0.7s;
+}
+
+.btn-relatorio2 a {
+	text-decoration: none;
+	background: rgba(2,47,93,1);
+	color: whitesmoke;
+	transition-duration: 0.7s;
+	color: white;
+}
+
+.btn-relatorio2 a:hover {
+	background:  #34495e;
+	transition-duration: 0.7s;
+	text-decoration: none;
+	color: white;
+}
+
+
+.btn-relatorio:hover {
+	background:  #34495e;
+	transition-duration: 0.7s;
+}
+
+.form_ocorrencia {
+	width: 50%;
+	position: absolute;
+	left: 47.5%;
+	top: 30%;
+	padding: 0;
+}
+
+.ficha_individual {
+	position: absolute;
+	top: 30%;
+	width: 50%;
+	padding: 0;
+	margin: 0;
+}
+

@@ -8,19 +8,13 @@
      		 header("Location: index.php"); exit;
  		 }
 
-	#require once para insert
-	#Dados para conexão com Banco para realizar Select:
-	$host = "localhost";
-	$user_bd = "root";
-	$pass_bd = "";
-	$bd = "ocorrencia";
-	#abre conexao com banco
-	$conexao = mysqli_connect($host, $user_bd, $pass_bd, $bd);
+	#Conexao com Banco de dados
+  require_once "../manutencao/conecta.php";
+  $conexao = conecta();
 	#Valida dados do post
 	$usuario = isset($_POST['usuario'])?$_POST['usuario']:'';
 	$senha = isset($_POST['senha'])?$_POST['senha']:'';
-	#$usuario = mysql_real_escape_string($_POST['usuario']);
-  #	$senha = mysql_real_escape_string($_POST['senha']);
+	
  	
  	$select_dados = "SELECT * FROM `usuario_gestor` WHERE (`usuario` = '$usuario') AND senha = MD5('$senha') AND ativo = 1";
   		#"INSERT INTO usuario_gestor (usuario, nome, senha) VALUES ('$usuario','$nome', MD5('$senha'))"
@@ -44,7 +38,9 @@
 
       
   	} else {
-    	echo "Usuário ou senha inválidos!"; exit;
+    	echo "<script>
+                alert('Usuário ou senha inválidos');
+            </script>"; exit;
   }
 
   session_destroy();

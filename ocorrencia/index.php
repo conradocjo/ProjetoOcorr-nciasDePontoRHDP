@@ -15,30 +15,35 @@
 	<div class="subcabecalho"><h1>Ocorrência no Cartão de Ponto</h1>
 	</div>
 	<div>
-		<form class="formulario" action="php/validacao_formulario.php" method="post" accept-charset="utf-8">
+	<div class="admin">
+		<?php
+			require_once"php/menu3.php";
+		?>
+	</div>
+		<form class="formulario3" action="php/validacao_formulario.php" method="post" accept-charset="utf-8">
 		<fieldset>
-			<legend>Atenção</legend>
+			<legend>Acesso dos Colaboradores</legend>
+				
 				<p>Para realizar a ocorrencia do ponto, digite sua <b>matrícula</b> e <b>senha</b> no campo abaixo e clique em "Entrar". Durante a tentativa se tiver algum problema procure seu coordenador ou gestor imediato.</p>
-		<label><i class="fa fa-address-card-o" aria-hidden="true"></i> Matrícula: <input placeholder="Digite sua matrícula . . ." type="number" name="matricula"></label>
-		<label><i class="fa fa-address-card-o" aria-hidden="true"></i> Senha: <input placeholder="Digite sua senha . . ." type="password" name="senha_funcionario"></label>
-		<button type="submit" class="btn btn_azul"><i class="fa fa-key" aria-hidden="true"></i> Entrar </button>
+		<h1><i class="fa fa-user-circle" aria-hidden="true"></i></h1>
+		<label><input placeholder="Digite sua matrícula . . ." type="number" name="matricula"></label><br>
+		<label><input placeholder="Digite sua senha . . ." type="password" name="senha_funcionario"></label><br>
+		<button id="logar" type="submit" class="btn btn_azul"><i class="fa fa-key" aria-hidden="true"></i> Entrar </button>
 		</fieldset>
 	</form>
-	<div class="admin"><p>Se você é administrador do sistema <a href="/ocorrencia/php/dp/index.php">clique aqui</a>.</p></div>
-	<form class="formulario2" action="php/validacao.php" method="post" accept-charset="utf-8">
-		<fieldset>
-			<legend>Acesso do gestor(a)</legend>
-			<p>Prezado(a) gestor(a), para gerenciar as ocorrencias de ponto insira suas credencias.</p>
-		<div class="usuario_senha">	
-			<h1><i class="fa fa-user-circle" aria-hidden="true"></i></h1>
-			<label><input placeholder="Digite seu usuário . . ." type="text" name="usuario"></label><br>
-			<label><input placeholder="Digite sua senha . . ." type="password" name="senha"></label><br>
-			<button type="submit" class="btn btn_azul"> <i class="fa fa-key" aria-hidden="true"></i> Entrar </button>
-		</div>
-		</fieldset><br>
-	</form>
+	
+	
 
 	</div><!-- Div formulario -->
  	<?php require_once"php/rodape.php";?>
+
+	<script src="script/jquery-3.2.1.js" charset="utf-8"></script>
+	<script>
+		$(document).ready(function(){
+			$('.btn').click(function(){
+				$('.btn').text('Carregando...').addClass('btn_azul_efeito');
+			});
+		});
+	</script>
 </body>
 </html>

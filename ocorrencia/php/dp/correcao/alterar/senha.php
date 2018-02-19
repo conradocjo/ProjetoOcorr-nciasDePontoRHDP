@@ -32,24 +32,21 @@
 		<?php
 			header("Content-type: text/html; charset=utf-8");
 			mb_internal_encoding("UTF-8"); 
-			mysql_set_charset('utf8');
+			
 
 			#require once para insert
 			require_once"../../../manutencao/abre_conexao.php";
 			#Dados para conexão com Banco para realizar Select:
-			$host = "localhost";
-			$usuario = "root";
-			$senha = "";
-			$bd = "ocorrencia";
-			#abre conexao com banco
-			$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+			#Conexao com Banco de dados
+			require_once "../../../manutencao/conecta.php";
+			$conexao = conecta();
 			#manipula post
-			$senha = isset($_POST["senha"])?$_POST["senha"]:"";
+			$senha_post = isset($_POST["senha"])?$_POST["senha"]:"";
 			$user_post = isset($_POST["user_post"])?$_POST["user_post"]:"";
 			$usuario_sessao = isset($_SESSION['usuario'])?($_SESSION['usuario']):"";
 			#querys
 			$select_dados = "SELECT * FROM usuario_gestor WHERE usuario='$user_post' ";
-			$insert_dados = "UPDATE usuario_gestor SET senha =  MD5('$senha'), usuario_rastro_atualizacao = '$usuario_sessao' WHERE usuario = '$user_post' ";
+			$insert_dados = "UPDATE usuario_gestor SET senha =  MD5('$senha_post'), usuario_rastro_atualizacao = '$usuario_sessao' WHERE usuario = '$user_post' ";
 			
 			$testa_dados = mysqli_query($conexao, $select_dados);
 
@@ -58,7 +55,7 @@
 				insert($insert_dados);
 				echo "<div class='cadastro_existente'><h1>Senha do usuário $user_post alterado com sucesso.</h1></div>";
 			}else{
-				if($senha==""){
+				if($senha_post==""){
 					echo "<div class='dado_existente'><h1>Dados não foram preenchidos. </h1></div>";
 				}else{
 					

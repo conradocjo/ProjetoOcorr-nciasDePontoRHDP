@@ -8,7 +8,7 @@
 	#Dados de conexão com banco
 	$host = "localhost";
 	$usuario = "root";
-	$senha = "";
+	$senha = "nCenha";
 	$bd = "ocorrencia";
 
 	#Variavel para conexão com Banco

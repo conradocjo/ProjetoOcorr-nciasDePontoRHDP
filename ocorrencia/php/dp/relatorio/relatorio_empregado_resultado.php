@@ -27,23 +27,20 @@
 		  </header>";
 	?>
 	<?php require_once"../../menu.php";?>
-	<div class="container" style='overflow: auto; height: 420px'>
+	<div class="container" style='overflow: auto; height: 400px'>
 		
 			
 		<?php
 			#dados para conexão com Banco de dados.
 			header("Content-type: text/html; charset=utf-8");
 			mb_internal_encoding("UTF-8"); 
-			mysql_set_charset('utf8');
+			
 			#require once para insert
 			require_once"../../manutencao/abre_conexao.php";
 			#Dados para conexão com Banco para realizar Select:
-			$host = "localhost";
-			$usuario = "root";
-			$senha = "";
-			$bd = "ocorrencia";
-			#abre conexao com banco
-			$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+			#Conexao com Banco de dados
+			require_once "../../manutencao/conecta.php";
+			$conexao = conecta();
 			#dados da sessão
 			$usuario = isset($_SESSION['usuario'])?$_SESSION['usuario']:'';
 			#dados do post
@@ -53,7 +50,7 @@
  			
  			
 
- 			$sql_select_ocorrencia2 = "SELECT  ocorrencia.id, empregado.nome, empregado.matricula, ocorrencia.setor, ocorrencia.unidade, ocorrencia.status,  ocorrencia.justificativa,ocorrencia.data_ocorrencia, ocorrencia.primeira_entrada, ocorrencia.primeira_saida, ocorrencia.segunda_entrada, ocorrencia.segunda_saida, ocorrencia.data_hora, ocorrencia.assinado from ocorrencia  INNER JOIN usuario_gestor ON  ocorrencia.fk_usuario_gestor = usuario_gestor.id INNER JOIN empregado ON ocorrencia.fk_empregado = empregado.id WHERE  ocorrencia.assinado = '10' AND ocorrencia.matricula = '$matricula' AND ocorrencia.data_ocorrencia BETWEEN '$data1' AND '$data2'";
+ 			$sql_select_ocorrencia2 = "SELECT  ocorrencia.id, empregado.nome, empregado.matricula, ocorrencia.setor, ocorrencia.unidade, ocorrencia.status,  ocorrencia.justificativa,DATE_FORMAT(ocorrencia.data_ocorrencia, '%d/%m/%Y'), ocorrencia.primeira_entrada, ocorrencia.primeira_saida, ocorrencia.segunda_entrada, ocorrencia.segunda_saida, DATE_FORMAT(ocorrencia.data_hora, '%d/%m/%Y %H:%i:%s'), ocorrencia.data_ocorrencia , ocorrencia.assinado, ocorrencia.imagem from ocorrencia  INNER JOIN usuario_gestor ON  ocorrencia.fk_usuario_gestor = usuario_gestor.id INNER JOIN empregado ON ocorrencia.fk_empregado = empregado.id WHERE  ocorrencia.assinado = '10' AND ocorrencia.matricula = '$matricula' AND ocorrencia.data_ocorrencia BETWEEN '$data1' AND '$data2' ORDER BY ocorrencia.data_ocorrencia";
 
 
  			$sql_select_nome_gestor = "SELECT nome FROM usuario_gestor WHERE usuario = '$usuario' ";
@@ -69,7 +66,6 @@
 							<table class='aprovacao'>
 									<thead>
 										<tr>
-											<th>ID</th>
 											<th><i class='fa fa-user-o' aria-hidden='true'></i> Empregado</th>
 											<th><i class='fa fa-user-o' aria-hidden='true'></i> Matrícula</th>
 											<th><i class='fa fa-users' aria-hidden='true'></i> Setor</th>
@@ -81,8 +77,8 @@
 											<th><i class='fa fa-clock-o' aria-hidden='true'></i> 1º Saída</th>
 											<th><i class='fa fa-clock-o' aria-hidden='true'></i> 2º Entrada</th>
 											<th><i class='fa fa-clock-o' aria-hidden='true'></i> 2º Saída</th>
-											
-											
+											<th><i class='fa fa-clock-o' aria-hidden='true'></i>Realização</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -92,16 +88,22 @@
 											while ($resultado3 = mysqli_fetch_array($select_ocorrencia)) {
 												echo"<tr> ";
 
-												for ($i=0; $i <= 11; $i++) { 
+												for ($i=1; $i <= 12; $i++) { 
 
 													echo"<td>$resultado3[$i]</td>";
 
 
 												}
 
-												if ($resultado3[12] == '1') {
+												if ($resultado3[13] == '1') {
 													echo"<td>Ocorrência Aprovada</td>";
 												}
+
+												if ($resultado3[5] == "Atestado") {
+															echo "<td><a href='../../$resultado3[15]' target='_blank' ><i class='fa fa-envelope' aria-hidden='true'></i></a></td>";
+														}else{
+															echo "<td><i class='fa fa-times' aria-hidden='true'></i></td>";
+														}
 										
 												echo"</tr>";		
 											}
@@ -113,7 +115,7 @@
 							</div>
 						";
  					} else {
- 						echo "<div class='dado_existente'><h1>Nenhuma ocorrência de $matricula.</h1></div>";
+ 						echo "<div class='cadastro_existente'><h1>Nenhuma ocorrência de $matricula.</h1></div>";
  					}
 
 		?>

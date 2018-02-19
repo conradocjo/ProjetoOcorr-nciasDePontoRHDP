@@ -34,22 +34,19 @@
 			#dados para conexão com Banco de dados.
 			header("Content-type: text/html; charset=utf-8");
 			mb_internal_encoding("UTF-8"); 
-			mysql_set_charset('utf8');
+			
 			#require once para insert
 			require_once"../../manutencao/abre_conexao.php";
 			#Dados para conexão com Banco para realizar Select:
-			$host = "localhost";
-			$usuario = "root";
-			$senha = "";
-			$bd = "ocorrencia";
-			#abre conexao com banco
-			$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+			#Conexao com Banco de dados
+			require_once "../../manutencao/conecta.php";
+			$conexao = conecta();
 			#dados da sessão
 			$usuario = isset($_SESSION['usuario'])?$_SESSION['usuario']:'';
  			
  			
 
- 			$sql_select_ocorrencia2 = "SELECT  ocorrencia.id, empregado.nome, empregado.matricula, usuario_gestor.nome, ocorrencia.setor, ocorrencia.unidade, ocorrencia.status,  ocorrencia.justificativa,ocorrencia.data_ocorrencia, ocorrencia.primeira_entrada, ocorrencia.primeira_saida, ocorrencia.segunda_entrada, ocorrencia.segunda_saida, ocorrencia.data_hora from ocorrencia  INNER JOIN usuario_gestor ON  ocorrencia.fk_usuario_gestor = usuario_gestor.id INNER JOIN empregado ON ocorrencia.fk_empregado = empregado.id WHERE   assinado = 1 ";
+ 			$sql_select_ocorrencia2 = "SELECT  ocorrencia.id, empregado.nome, empregado.matricula, usuario_gestor.nome, ocorrencia.setor, ocorrencia.unidade, ocorrencia.status,  ocorrencia.justificativa,ocorrencia.data_ocorrencia, ocorrencia.primeira_entrada, ocorrencia.primeira_saida, ocorrencia.segunda_entrada, ocorrencia.segunda_saida, ocorrencia.data_hora, ocorrencia.imagem, ocorrencia.flag_48h from ocorrencia  INNER JOIN usuario_gestor ON  ocorrencia.fk_usuario_gestor = usuario_gestor.id INNER JOIN empregado ON ocorrencia.fk_empregado = empregado.id WHERE   assinado = 1 ORDER BY ocorrencia.data_ocorrencia ";
 
 
  			$sql_select_nome_gestor = "SELECT nome FROM usuario_gestor WHERE usuario = '$usuario' ";
@@ -65,7 +62,7 @@
 							<table class='aprovacao'>
 									<thead>
 										<tr>
-											<th>ID</th>
+											
 											<th><i class='fa fa-user-o' aria-hidden='true'></i> Empregado</th>
 											<th><i class='fa fa-user-o' aria-hidden='true'></i> Matrícula</th>
 											<th><i class='fa fa-user-o' aria-hidden='true'></i> Gestor</th>
@@ -78,7 +75,7 @@
 											<th><i class='fa fa-clock-o' aria-hidden='true'></i> 1º Saída</th>
 											<th><i class='fa fa-clock-o' aria-hidden='true'></i> 2º Entrada</th>
 											<th><i class='fa fa-clock-o' aria-hidden='true'></i> 2º Saída</th>
-											
+											<th><i class='fa fa-file-text-o' aria-hidden='true'></i> Imagem</th>
 											<th></th>
 											
 										</tr>
@@ -89,17 +86,53 @@
 											
 											while ($resultado3 = mysqli_fetch_array($select_ocorrencia)) {
 												echo"<tr> ";
-
-												for ($i=0; $i <= 12; $i++) { 
+												if (($resultado3[15] == 3) || ($resultado3[15] == 2)) {
+													echo"<tr class='grid_teste3'> ";
+													for ($i=1; $i <= 12; $i++) { 
 
 													echo"<td>$resultado3[$i]</td>";
 
 
 												}
-
+													if ($resultado3[6] == "Atestado") {
+															echo "<td><a href='../../$resultado3[14]' target='_blank' ><i class='fa fa-envelope' aria-hidden='true'></i></a></td>";
+														}else{
+															echo "<td><i class='fa fa-times' aria-hidden='true'></i></td>";
+														}
 													echo "<td> <input type='radio' name='id_ocorrencia' value='$resultado3[0]'></td>";
 												echo"</tr>";		
+											} else if ($resultado3[15] == 1) {
+												echo"<tr class='grid_teste'> ";
+												for ($i=1; $i <= 12; $i++) { 
+
+													echo"<td>$resultado3[$i]</td>";
+
+
+												}
+													if ($resultado3[6] == "Atestado") {
+															echo "<td><a href='../../$resultado3[14]' target='_blank' ><i class='fa fa-envelope' aria-hidden='true'></i></a></td>";
+														}else{
+															echo "<td><i class='fa fa-times' aria-hidden='true'></i></td>";
+														}
+													echo "<td> <input type='radio' name='id_ocorrencia' value='$resultado3[0]'></td>";
+												echo"</tr>";
+											}else{
+												for ($i=1; $i <= 12; $i++) { 
+
+													echo"<td>$resultado3[$i]</td>";
+
+
+												}
+													if ($resultado3[6] == "Atestado") {
+															echo "<td><a href='../../$resultado3[14]' target='_blank' ><i class='fa fa-envelope' aria-hidden='true'></i></a></td>";
+														}else{
+															echo "<td><i class='fa fa-times' aria-hidden='true'></i></td>";
+														}
+													echo "<td> <input type='radio' name='id_ocorrencia' value='$resultado3[0]'></td>";
+												echo"</tr>";
 											}
+										}
+												
 									echo"
 									</tbody>
 							</table> 
@@ -112,12 +145,20 @@
 							</div>
 						</form>";
  					} else {
- 						echo "<div class='dado_existente'><h1>Você não tem ocorrencias para serem aprovadas.</h1></div>";
+ 						echo "<div class='cadastro_existente'><h1>Você não tem ocorrências para serem aprovadas.</h1></div>";
  					}
 
 		?>
 	</div>
  	<?php require_once"../../rodape.php";?>
+ 	<script src="../../../script/jquery-3.2.1.js" charset="utf-8"></script>
+	<script>
+		$(document).ready(function(){
+			$('.btn').click(function(){
+				$('.btn').text('Dando baixa, por favor aguarde...').addClass('btn_azul_efeito');
+			});
+		});
+	</script>
 </body>
 </html>
 

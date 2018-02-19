@@ -31,17 +31,14 @@
 		<?php
 			header("Content-type: text/html; charset=utf-8");
 			mb_internal_encoding("UTF-8"); 
-			mysql_set_charset('utf8');
+			
 
 			#require once para insert
 			require_once"../../manutencao/abre_conexao.php";
 			#Dados para conexão com Banco para realizar Select:
-			$host = "localhost";
-			$usuario = "root";
-			$senha = "";
-			$bd = "ocorrencia";
-			#abre conexao com banco
-			$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+			#Conexao com Banco de dados
+			require_once "../../manutencao/conecta.php";
+			$conexao = conecta();
 			#manipula post
 			$nome_unidade = isset($_POST['nome_unidade'])?$_POST['nome_unidade']:'';
 			$endereco_unidade = isset($_POST['endereco_unidade'])?$_POST['endereco_unidade']:'';

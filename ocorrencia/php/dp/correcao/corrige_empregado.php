@@ -30,65 +30,44 @@
 	<div class="">
 		<form class="form_cadastro_unidade" action="corrigindo_empregado.php" method="post" accept-charset="utf-8">
 		<fieldset>
-			<legend>Correção de cadastro do empregado</legend>
+			<legend>Correção de empregado</legend>
 				<?php
-
-					#require once para insert
-					require_once"../../manutencao/abre_conexao.php";
-					#Dados para conexão com Banco para realizar Select:
-					$host = "localhost";
-					$usuario = "root";
-					$senha = "";
-					$bd = "ocorrencia";
-					#abre conexao com banco
-					$conexao = mysqli_connect($host, $usuario, $senha, $bd);
-					#querys
-					$sql_matricula = "SELECT * FROM empregado WHERE matricula";
-					$sql_unidade = "SELECT * FROM unidade";
-					$sql_setor = "SELECT * FROM setor";
-					$sql_gestor = "SELECT nome FROM usuario_gestor WHERE nivel = 1";
-					$select = mysqli_query($conexao, $sql_matricula);
-					$select_setor = mysqli_query($conexao, $sql_setor);
-					$select_unidade = mysqli_query($conexao, $sql_unidade);
-					$select_gestor = mysqli_query($conexao, $sql_gestor);
-					# 
+					header("Content-type: text/html; charset=utf-8");
+					mb_internal_encoding("UTF-8"); 
+					
+					#Conexao com Banco de dados
+					require_once "../../manutencao/conecta.php";
+					$conexao = conecta();
+					#dados da sessão
 					$usuario_sessao = isset($_SESSION['usuario'])?$_SESSION['usuario']:'';
+ 					$sql_select_nome_gestor = "SELECT nome FROM usuario_gestor WHERE usuario = '$usuario_sessao' ";
+ 					$select_gestor = mysqli_query($conexao, $sql_select_nome_gestor);
+ 					while ($resultado2 = mysqli_fetch_array($select_gestor)) {
+							echo "<h5>Você está logado como $resultado2[0]!</h5>";
+					}
+
+					
 					#Em baixo são inputs e selects de formulário
 
-					#Input matrícula do empregado
-					echo "<label><i class='fa fa-address-card-o' aria-hidden='true'></i> Digite a matricula do empregado: <input type='number' style='width: 200px ' name='matricula' placeholder='Digite a matrícula.' ></label> ";
-					#Input nome empregado
-					echo "<label><i class='fa fa-user-o' aria-hidden='true'></i> Digite o nome correto do empregado: <input placeholder='Digite o nome do empregado . . .' type='text' style='width: 350px ' name='nome_empregado'></label><br>";
-					#Select Setor
-					echo "<br><label><i class='fa fa-users' aria-hidden='true'></i> Selecione o setor correto: 
-					<select name='setor'>";
-					while ($resultado2 = mysqli_fetch_array($select_setor)) {
-						echo "<option value='$resultado2[0]'>$resultado2[1]</option>";
-					}
-					echo"</select></label> ";
-					#Select Unidade
-					echo " <label><i class='fa fa-building-o' aria-hidden='true'></i> Selecione a unidade correta: 
-					<select name='unidade'>";
-					while ($resultado1 = mysqli_fetch_array($select_unidade)) {
-						echo "<option value='$resultado1[0]'>$resultado1[1]</option>";
-					}
-					echo"</select></label> ";
-					#Select Gestor
-					echo " <label><i class='fa fa-user-o' aria-hidden='true'></i> Selecione o gestor correto: 
-					<select name='gestor'>";
-					while ($resultado = mysqli_fetch_array($select_gestor)) {
-						echo "<option value='$resultado[0]'>$resultado[0]</option>	";
-					}
-					echo"</select></label> ";
-					echo "<input type='hidden' name='rastro' value = '$usuario_sessao' >";
+					echo "<label><i class='fa fa-address-card-o' aria-hidden='true'></i>Digite a matrícula: <input type='number' style='width:300px ' name='empregado' placeholder='Digite a matícula do funcionário . . .' required='' ></label> ";
+					
 				?>
-		</fieldset><br>
-				<button type="submit" class="btn btn_azul"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Enviar Dados</button>
+		</fieldset>
+				<button type="submit" class="btn btn_azul"><i class="fa fa-search" aria-hidden="true"></i> Consultar</button>
 		</form><br>
 	</div><!-- Div formulario -->
  	<?php require_once"../../rodape.php";?>
+ 	<script src="../../../script/jquery-3.2.1.js" charset="utf-8"></script>
+	<script>
+		$(document).ready(function(){
+			$('.btn').click(function(){
+				$('.btn').text('Enviando dados, por favor aguarde...').addClass('btn_azul_efeito');
+			});
+		});
+	</script>
 </body>
 </html>
+
 <?php
 
 	} else {

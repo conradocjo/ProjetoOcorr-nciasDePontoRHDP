@@ -20,15 +20,6 @@
 <link rel="stylesheet" type="text/css" href="jquery-autocomplete/jquery.autocomplete.css"/>
 <link rel="stylesheet" type="text/css" href="jquery-autocomplete/lib/thickbox.css"/>
  
- <script type="text/javascript">
- 	$(document).ready(function(){
-		$("#txtNome").autocomplete("completar.php", {
-			width:310,
-			selectFirst: false
-		});
-	});
- </script>
- 
 </head>
  
 <body>
@@ -44,23 +35,27 @@
 		  </header>";
 	?>
 	<?php require_once"../menu2.php";?>
-	<div class="container" style='overflow: auto; height: 420px'>
+	<div class="container" style='overflow: auto; height: 400px'>
 		
 			
 		<?php
+			#Dates
+ 			$dia_hj = date('d');
+			$mes_hj = date('m');
+			$dia_antesDeOntem = date('d', strtotime( ' - 2 days'));
+			$mes_antesDeOntem = date('m', strtotime( ' - 2 days'));
+			
+
 			#dados para conexão com Banco de dados.
 			header("Content-type: text/html; charset=utf-8");
 			mb_internal_encoding("UTF-8"); 
-			mysql_set_charset('utf8');
 			#require once para insert
 			require_once"../manutencao/abre_conexao.php";
-			#Dados para conexão com Banco para realizar Select:
-			$host = "localhost";
-			$usuario = "root";
-			$senha = "";
-			$bd = "ocorrencia";
-			#abre conexao com banco
-			$conexao = mysqli_connect($host, $usuario, $senha, $bd);
+			#Conexao com Banco de dados
+			require_once "../manutencao/conecta.php";
+			#Conta Dias úteis
+			require_once "../manutencao/diasUteis_gestor.php";
+			$conexao = conecta();
 			#dados da sessão
 			$usuario = isset($_SESSION['usuario'])?$_SESSION['usuario']:'';
  			#POST
@@ -68,14 +63,100 @@
  			$id_ocorrencia = isset($_POST['id_ocorrencia'])?$_POST['id_ocorrencia']:'';
 
  			#Query
- 			$insert = "UPDATE ocorrencia SET assinado = '$assinatura' WHERE id = '$id_ocorrencia'  ";
+ 			$select_id = "SELECT status FROM ocorrencia WHERE id = '$id_ocorrencia'";
+ 			$select_data = "SELECT data_ocorrencia, flag_48h FROM ocorrencia WHERE id = '$id_ocorrencia'";
+ 			$query_select_id = mysqli_query($conexao, $select_id);
+ 			$query_select_data = mysqli_query($conexao, $select_data);
 
- 			if($id_ocorrencia==""){
+/*
+
+if (($diaN >= $dia_hj) || ($mesN > $mes_hj))
+if (($diaN < $dia_antesDeOntem) || ($mesN < $mes_antesDeOntem))
+
+echo "dia ocorrencia: $dia_oco_N";echo "antes ontem: $dia_antesDeOntem";
+				echo "<br>mes ocorrencia: $mes_oco_N";echo "antes ontem: $mes_antesDeOntem";
+
+*/
+
+
+ 			while ($verifica_data = mysqli_fetch_array($query_select_data)) {
+ 				$dia_ocorrencia = diasUteis($verifica_data[0]);
+ 				#$dia_ocorrencia = $verifica_data[0];
+ 				
+				$dia_oco_N = date("d", strtotime($dia_ocorrencia));
+				$mes_oco_N = date("m", strtotime($dia_ocorrencia));
+				
+
+				if (($dia_oco_N > $dia_antesDeOntem) || ($mes_oco_N > $mes_antesDeOntem)){
+					if($id_ocorrencia==""){
 					echo "<div class='dado_existente'><h1>Dados não foram preenchidos. <a href='javascript:history.back()'>Clique aqui</a> para voltar.</h1></div>";
-				}else{
-					insert($insert);
-					header("Location: aprova_ocorrencia.php");
+					}else{
+						while ($verifica_motivo = mysqli_fetch_array($query_select_id)) {
+	 						if ($verifica_motivo[0] === 'Atestado') {
+	 							if ($assinatura == 1) {
+	 								$insert1 = "UPDATE ocorrencia SET assinado = 3 WHERE id = '$id_ocorrencia'  ";
+	 								insert($insert1);
+									header("Location: aprova_ocorrencia.php");
+	 							}else{
+	 								$insert3 = "UPDATE ocorrencia SET assinado = '$assinatura' WHERE id = '$id_ocorrencia'  ";
+	 								insert($insert3);
+	 								header("Location: aprova_ocorrencia.php");
+	 							}
+	 						} else {
+	 						$insert = "UPDATE ocorrencia SET assinado = '$assinatura' WHERE id = '$id_ocorrencia'  ";
+	 						insert($insert);
+							header("Location: aprova_ocorrencia.php");
+	 						}
+	 					}
+						
+					}
+				} else {
+					if($id_ocorrencia==""){
+					echo "<div class='dado_existente'><h1>Dados não foram preenchidos. <a href='javascript:history.back()'>Clique aqui</a> para voltar.</h1></div>";
+					}else if ($verifica_data[1] == 1) {
+						while ($verifica_motivo = mysqli_fetch_array($query_select_id)) {
+	 						if ($verifica_motivo[0] === 'Atestado') {
+	 							if ($assinatura == 1) {
+	 								$insert1 = "UPDATE ocorrencia SET assinado = 3, flag_48h = 3 WHERE id = '$id_ocorrencia'  ";
+	 								insert($insert1);
+									header("Location: aprova_ocorrencia.php");
+	 							}else{
+	 								$insert3 = "UPDATE ocorrencia SET assinado = '$assinatura', flag_48h = 3 WHERE id = '$id_ocorrencia'  ";
+	 								insert($insert3);
+	 								header("Location: aprova_ocorrencia.php");
+	 							}
+	 						} else {
+	 						$insert = "UPDATE ocorrencia SET assinado = '$assinatura', flag_48h = 3 WHERE id = '$id_ocorrencia'  ";
+	 						insert($insert);
+							header("Location: aprova_ocorrencia.php");
+	 						}
+	 					}
+						echo "<div class='dado_existente'><h1>Aprovado com mais de 48 horas.</h1></div>";
+					} else {
+						while ($verifica_motivo = mysqli_fetch_array($query_select_id)) {
+	 						if ($verifica_motivo[0] === 'Atestado') {
+	 							if ($assinatura == 1) {
+	 								$insert1 = "UPDATE ocorrencia SET assinado = 3, flag_48h = 2 WHERE id = '$id_ocorrencia'  ";
+	 								insert($insert1);
+									header("Location: aprova_ocorrencia.php");
+	 							}else{
+	 								$insert3 = "UPDATE ocorrencia SET assinado = '$assinatura', flag_48h = 2 WHERE id = '$id_ocorrencia'  ";
+	 								insert($insert3);
+	 								header("Location: aprova_ocorrencia.php");
+	 							}
+	 						} else {
+	 						$insert = "UPDATE ocorrencia SET assinado = '$assinatura', flag_48h = 2 WHERE id = '$id_ocorrencia'  ";
+	 						insert($insert);
+							header("Location: aprova_ocorrencia.php");
+	 						}
+	 					}
+						echo "<div class='dado_existente'><h1>Aprovado com mais de 48 horas.</h1></div>";
+					}
+					
 				}
+ 			}
+
+ 			
 			
 		?>
 	</div>

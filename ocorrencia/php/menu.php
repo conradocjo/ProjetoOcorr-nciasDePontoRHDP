@@ -3,7 +3,7 @@
 	<div class='menu_position'>
 			<div class='menu-container'>
     <ul class='menu clearfix'>
-        <li><a href='#'>Cadastrar</a>
+        <li><a href='#'>Cadastro Geral</a>
             <ul class='sub-menu clearfix'>
                 <li><a href='/ocorrencia/php/dp/cadastro/cadastro_unidade.php'><i class='fa fa-building-o' aria-hidden='true'></i> Unidade</a>
                 <li><a href='/ocorrencia/php/dp/cadastro/cadastro_empregado.php'><i class='fa fa-user-o' aria-hidden='true'></i> Empregado</a></li>
@@ -23,15 +23,19 @@
             </ul><!-- submenu -->
         </li>
 
-        <li><a href='#'>Bloqueio & Exclusão </a>
-            <ul class='sub-menu clearfix'>
-                <li><a href='../exclusao/exclui_unidade.php'><i class='fa fa-building-o' aria-hidden='true'></i> Unidade</a>
-                <li><a href='../exclusao/exclui_empregado.php'><i class='fa fa-user-o' aria-hidden='true'></i> Empregado</a></li>
-                <li><a href='../exclusao/bloqueia_gestor.php'><i class='fa fa-user-o' aria-hidden='true'></i> Usuários</a></li>
-            </ul><!-- submenu -->
+        <li><a href='/ocorrencia/php/dp/exclusao/bloqueia_gestor.php'><i class='fa fa-ban' aria-hidden='true'></i> Bloquear Usuários</a>
+           
         </li>
         
-         <li><a href='#'>Relatório de Ocorrência</a>
+         <li><a href='../relatorio/relatorios.php'><i class='fa fa-line-chart' aria-hidden='true'></i> Relatório de Ocorrência</a></li>
+
+        <li><a href='../relatorio/ocorrencias.php'><i class='fa fa-list' aria-hidden='true'></i> Ocorrências aprovadas</a>
+        <li class='selected'><a href='/ocorrencia/php/manutencao/deslogar_admin.php'><i class='fa fa-power-off' aria-hidden='true'></i> Sair</a>
+    </ul>
+</div>
+</div>";
+
+ /* <li><a href='#'>Relatório de Ocorrência</a>
             <!-- Nível 1 -->
             <!-- submenu -->
             <ul class='sub-menu clearfix'>
@@ -41,9 +45,22 @@
             </ul><!-- submenu -->
         </li>
 
-        <li><a href='../relatorio/ocorrencias_aprovadas.php'>Ocorrências aprovadas</a>
-        <li class='selected'><a href='/ocorrencia/php/manutencao/deslogar_admin.php'><i class='fa fa-power-off' aria-hidden='true'></i> Sair</a>
-    </ul>
-</div>
-</div>";
+
+
+Futuramente será usado no usuário Master:
+
+<li><a href='#'>Bloqueio & Exclusão </a>
+            <ul class='sub-menu clearfix'>
+                <li><a href='/ocorrencia/php/dp/exclusao/exclui_unidade.php'><i class='fa fa-building-o' aria-hidden='true'></i> Unidade</a>
+                <li><a href='/ocorrencia/php/dp/exclusao/exclui_empregado.php'><i class='fa fa-user-o' aria-hidden='true'></i> Empregado</a></li>
+                <li><a href='/ocorrencia/php/dp/exclusao/bloqueia_gestor.php'><i class='fa fa-user-o' aria-hidden='true'></i> Usuários</a></li>
+            </ul><!-- submenu -->
+        </li>
+
+
+
+
+
+
+*/
 ?>
